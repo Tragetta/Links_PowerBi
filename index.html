@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tragetta · Apps Power BI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --green:   #00b01e;
+      --green-dim: #00901a;
+      --bg:      #f5f5f3;
+      --surface: #ffffff;
+      --border:  #e3e3df;
+      --text:    #1a1a1a;
+      --muted:   #6b6b6b;
+      --radius:  12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header img {
+      height: 36px;
+      display: block;
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .header-badge span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 56px 40px 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .greeting {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--black);
+      letter-spacing: -.02em;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .hero p {
+      margin-top: 12px;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .count-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      padding: 6px 14px;
+      background: var(--black);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 100px;
+      letter-spacing: .04em;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      border: 2px solid transparent;
+      transition: border-color .18s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,.09);
+      transform: translateY(-2px);
+    }
+
+    .card:hover::after {
+      border-color: var(--green);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #f0fdf0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .card-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .card-action {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green-dim);
+      letter-spacing: .03em;
+    }
+
+    .card-action svg {
+      width: 14px;
+      height: 14px;
+      transition: transform .18s ease;
+    }
+
+    .card:hover .card-action svg {
+      transform: translateX(3px);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 960px;
+      margin: 36px auto 20px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .divider span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .divider hr {
+      flex: 1;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 960px;
+      margin: 48px auto 0;
+      padding: 0 40px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    footer::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .hero  { padding: 36px 20px 28px; }
+      .grid  { padding: 0 20px; gap: 12px; }
+      .divider { padding: 0 20px; }
+      footer { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="logo tragetta.png" alt="Tragetta" />
+    <div class="header-badge">
+      <span></span>Power BI Apps
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="greeting">Seja bem vindo ao nosso Portal!</div>
+    <h1>Acesse os apps<br><em>Power BI</em> da Tragetta</h1>
+    <p>Todos os painéis analíticos da empresa em um só lugar. Clique no app desejado para abrir diretamente no Power BI.</p>
+    <div class="count-pill">12 apps disponíveis</div>
+  </section>
+
+  <!-- GRID -->
+  <div class="grid">
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=bcc5170f-3e8f-474d-8034-ac9348cf7706&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 7h18M3 12h18M3 17h10" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Adm Comercial</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=8c545df6-58c6-4e8a-aa94-4978b2960049&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="16" rx="2" stroke="#00b01e" stroke-width="2"/>
+          <path d="M7 9h10M7 13h6" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Contabilidade</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=1d45764a-5ffa-4d7b-b322-0486753e9bbb&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" stroke="#00b01e" stroke-width="2"/>
+          <path d="M2 12h2m16 0h2M12 2v2m0 16v2" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Customer Service</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=c0c673cd-d957-4881-9995-f5f6aff9b77a&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" stroke="#00b01e" stroke-width="2"/>
+          <path d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Customer Service Clientes</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=4e779e8b-7f66-459c-974d-5689a294cbab&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3v18M6 7l6-4 6 4M5 20h14" stroke="#00b01e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Finanças</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=8930d93e-6a32-402c-83fd-e91ce8c4f89c&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 17l4-8 4 5 3-3 4 6" stroke="#00b01e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 20h18" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Inteligência Comercial</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=7e12a24e-85a8-451b-8890-71822a00800c&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3Z" stroke="#00b01e" stroke-width="2"/>
+          <path d="M9 12l2 2 4-4" stroke="#00b01e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Melhoria Contínua</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=ee2f3cfa-1ae3-4ecb-a171-157cfe6fd5ef&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="11" width="4" height="10" rx="1" stroke="#00b01e" stroke-width="2"/>
+          <rect x="10" y="7" width="4" height="14" rx="1" stroke="#00b01e" stroke-width="2"/>
+          <rect x="17" y="3" width="4" height="18" rx="1" stroke="#00b01e" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="card-label">Operacional</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=ae19cb8f-19a3-448c-9de6-c6fb595f3c62&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2Z" stroke="#00b01e" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Qualidade</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=5e1933a5-bf7f-4bfc-ac96-47cdb44e70f5&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 7v10M8 11h8" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="9" stroke="#00b01e" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="card-label">Receita</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=4c99ffc6-2fb9-4cf7-8a15-55c169f86641&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="7" r="4" stroke="#00b01e" stroke-width="2"/>
+          <circle cx="17" cy="9" r="3" stroke="#00b01e" stroke-width="2"/>
+          <path d="M2 20c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+          <path d="M17 14c2.21 0 4 1.567 4 3.5" stroke="#00b01e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-label">Recursos Humanos</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=12332654-e64d-4dc6-9b7e-0d10dd2c971d&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 20L8 14l4 3 4-6 4-4" stroke="#00b01e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="7" r="2" fill="#00b01e"/>
+        </svg>
+      </div>
+      <div class="card-label">Rentabilidade</div>
+      <div class="card-action">Abrir app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#00901a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Business Intelligence · Tragetta &mdash; Todos os direitos reservados
+  </footer>
+
+</body>
+</html>
