@@ -69,14 +69,14 @@
       object-fit: contain;
     }
 
-    /* Logo no light mode: mantém preto e transforma vermelho em verde */
+    /* Logo no light mode: mantém preto e transforma vermelho em verde #00b01e */
     header .logo-img {
-      filter: hue-rotate(120deg);
+      filter: hue-rotate(145deg) saturate(1.2);
     }
 
-    /* Logo em dark mode: inverte para branco e mantém verde */
+    /* Logo em dark mode: inverte para branco e mantém verde #00b01e */
     [data-theme="dark"] header .logo-img {
-      filter: invert(1) hue-rotate(120deg);
+      filter: invert(1) hue-rotate(145deg) saturate(1.2);
     }
 
     /* Container da logo */
