@@ -10,9 +10,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0d0d0e;
-      --green:   #e43e0c;
-      --green-dim: #90001f;
+      --black:   #0d0d0d;
+      --green:   #00b01e;
+      --green-dim: #00901a;
       --bg:      #f5f5f3;
       --surface: #ffffff;
       --border:  #e3e3df;
@@ -265,7 +265,8 @@
 
   <!-- HEADER -->
   <header>
-    <img src="logo tragetta.png" alt="Tragetta" />
+    <img src="data:image/png;base64,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" 
+         alt="Tragetta" />
     <div class="header-badge">
       <span></span>Power BI Apps
     </div>
@@ -273,7 +274,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="greeting">Seja bem vindo ao nosso Portal!</div>
+    <div class="greeting">Olá, Luis Katsumi Matsuda!</div>
     <h1>Acesse os apps<br><em>Power BI</em> da Tragetta</h1>
     <p>Todos os painéis analíticos da empresa em um só lugar. Clique no app desejado para abrir diretamente no Power BI.</p>
     <div class="count-pill">12 apps disponíveis</div>
