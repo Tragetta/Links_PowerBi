@@ -62,38 +62,11 @@
     }
 
     /* Logo no header */
-    header img {
+    header img,
+    header .logo-img {
       height: 36px;
       display: block;
-    }
-
-    /* Logo SVG no header */
-    header svg {
-      height: 36px;
-      display: block;
-      color: var(--text);
-    }
-
-    /* Container da logo com texto e ícone */
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .logo-text {
-      display: inline-block;
-    }
-
-    .logo-container svg {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
+      object-fit: contain;
     }
 
     /* Badge com ponto verde e texto "Power BI Apps" */
@@ -389,17 +362,8 @@
   <!-- ║ Logo, badge de status e botão para alternar tema (light/dark)║ -->
   <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <header>
-    <!-- Logo em SVG - Logomarca Tragetta -->
-    <div class="logo-container">
-      <span class="logo-text">tragetta</span>
-      <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" aria-label="Tragetta Logo">
-        <!-- Ícone verde (quadrados) -->
-        <rect x="0" y="0" width="7" height="7" fill="#00b01e" rx="1"/>
-        <rect x="9" y="0" width="7" height="7" fill="#00b01e" rx="1"/>
-        <rect x="4.5" y="9" width="7" height="7" fill="#00b01e" rx="1"/>
-        <rect x="13.5" y="9" width="7" height="7" fill="#00b01e" rx="1"/>
-      </svg>
-    </div>
+    <!-- Logo Tragetta -->
+    <img src="logo tragetta.png" alt="Tragetta" class="logo-img" />
 
     <!-- Badge indicando status com "Power BI Apps" -->
     <div class="header-badge">
