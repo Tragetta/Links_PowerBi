@@ -74,6 +74,28 @@
       color: var(--text);
     }
 
+    /* Container da logo com texto e ícone */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text {
+      display: inline-block;
+    }
+
+    .logo-container svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
     /* Badge com ponto verde e texto "Power BI Apps" */
     .header-badge {
       display: flex;
@@ -368,18 +390,16 @@
   <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <header>
     <!-- Logo em SVG - Logomarca Tragetta -->
-    <svg viewBox="0 0 200 50" width="150" height="37" xmlns="http://www.w3.org/2000/svg" aria-label="Tragetta Logo">
-      <!-- Texto "tragetta" em preto -->
-      <text x="0" y="32" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="var(--text)">tragetta</text>
-      
-      <!-- Ícone verde (quadrados/símbolo) -->
-      <g transform="translate(155, 8)">
-        <rect x="0" y="0" width="8" height="8" fill="var(--green)" rx="1"/>
-        <rect x="10" y="0" width="8" height="8" fill="var(--green)" rx="1"/>
-        <rect x="5" y="10" width="8" height="8" fill="var(--green)" rx="1"/>
-        <rect x="15" y="10" width="8" height="8" fill="var(--green)" rx="1"/>
-      </g>
-    </svg>
+    <div class="logo-container">
+      <span class="logo-text">tragetta</span>
+      <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" aria-label="Tragetta Logo">
+        <!-- Ícone verde (quadrados) -->
+        <rect x="0" y="0" width="7" height="7" fill="#00b01e" rx="1"/>
+        <rect x="9" y="0" width="7" height="7" fill="#00b01e" rx="1"/>
+        <rect x="4.5" y="9" width="7" height="7" fill="#00b01e" rx="1"/>
+        <rect x="13.5" y="9" width="7" height="7" fill="#00b01e" rx="1"/>
+      </svg>
+    </div>
 
     <!-- Badge indicando status com "Power BI Apps" -->
     <div class="header-badge">
