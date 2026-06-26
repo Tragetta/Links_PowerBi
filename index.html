@@ -21,12 +21,25 @@
       --radius:  12px;
     }
 
+    /* DARK THEME */
+    [data-theme="dark"] {
+      --black:   #ffffff;
+      --green:   #00b01e;
+      --green-dim: #00b01e;
+      --bg:      #0d0d0d;
+      --surface: #1a1a1a;
+      --border:  #2d2d2d;
+      --text:    #e8e8e8;
+      --muted:   #a0a0a0;
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       padding: 0 0 60px;
+      transition: background-color .18s ease, color .18s ease;
     }
 
     /* ── HEADER ── */
@@ -40,6 +53,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: background-color .18s ease, border-color .18s ease;
     }
 
     header img {
@@ -64,6 +78,35 @@
       border-radius: 50%;
       background: var(--green);
       display: inline-block;
+    }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color .18s ease, border-color .18s ease;
+      color: var(--text);
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* ── HERO ── */
@@ -270,6 +313,26 @@
     <div class="header-badge">
       <span></span>Power BI Apps
     </div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sun icon (shown in dark mode) -->
+        <g class="sun-icon" style="opacity: 1; transition: opacity .18s ease;">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </g>
+        <!-- Moon icon (shown in light mode) -->
+        <g class="moon-icon" style="opacity: 0; transition: opacity .18s ease;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </g>
+      </svg>
+    </button>
   </header>
 
   <!-- HERO -->
@@ -421,6 +484,60 @@
   <footer>
     Business Intelligence · Tragetta &mdash; Todos os direitos reservados
   </footer>
+
+  <script>
+    // Theme Management
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+
+    // Check for saved theme preference or default to system preference
+    function getInitialTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        return savedTheme;
+      }
+      
+      // Check system preference
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Apply theme
+    function applyTheme(theme) {
+      htmlElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateIconVisibility(theme);
+    }
+
+    // Update icon visibility
+    function updateIconVisibility(theme) {
+      if (theme === 'dark') {
+        sunIcon.style.opacity = '1';
+        moonIcon.style.opacity = '0';
+      } else {
+        sunIcon.style.opacity = '0';
+        moonIcon.style.opacity = '1';
+      }
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+    });
+
+    // Initialize theme on page load
+    applyTheme(getInitialTheme());
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  </script>
 
 </body>
 </html>
