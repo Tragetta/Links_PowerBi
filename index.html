@@ -5,62 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tragetta · Apps Power BI</title>
   <style>
+    /* Importa a fonte Inter do Google Fonts com diferentes pesos (400, 500, 600, 700) */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+    /* Reset padrão - remove margens, paddings e define box-sizing para todos os elementos */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Define variáveis CSS para o tema claro (padrão) */
     :root {
-      --black:   #0d0d0d;
-      --green:   #00b01e;
-      --green-dim: #00901a;
-      --bg:      #f5f5f3;
-      --surface: #ffffff;
-      --border:  #e3e3df;
-      --text:    #1a1a1a;
-      --muted:   #6b6b6b;
-      --radius:  12px;
+      --black:   #0d0d0d;    /* Cor preta principal */
+      --green:   #00b01e;    /* Cor verde da marca Tragetta */
+      --green-dim: #00901a;  /* Verde mais escuro para efeitos */
+      --bg:      #f5f5f3;    /* Cor de fundo da página */
+      --surface: #ffffff;    /* Cor de fundo dos cards e header */
+      --border:  #e3e3df;    /* Cor das bordas */
+      --text:    #1a1a1a;    /* Cor do texto principal */
+      --muted:   #6b6b6b;    /* Cor do texto secundário (menos destaque) */
+      --radius:  12px;       /* Raio dos cantos arredondados */
     }
 
-    /* DARK THEME */
+    /* Define variáveis CSS para o tema escuro */
     [data-theme="dark"] {
-      --black:   #ffffff;
-      --green:   #00b01e;
-      --green-dim: #00b01e;
-      --bg:      #0d0d0d;
-      --surface: #1f1f1f;
-      --border:  #3a3a3a;
-      --text:    #f0f0f0;
-      --muted:   #b0b0b0;
+      --black:   #ffffff;    /* Inverte black para white no dark mode */
+      --green:   #00b01e;    /* Verde permanece igual */
+      --green-dim: #00b01e;  /* Verde permanece igual */
+      --bg:      #0d0d0d;    /* Fundo escuro da página */
+      --surface: #1f1f1f;    /* Fundo escuro dos cards e header */
+      --border:  #3a3a3a;    /* Bordas mais visíveis no fundo escuro */
+      --text:    #f0f0f0;    /* Texto claro para legibilidade */
+      --muted:   #b0b0b0;    /* Texto secundário claro */
     }
 
+    /* Estilos do corpo da página */
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 0 0 60px;
-      transition: background-color .18s ease, color .18s ease;
+      font-family: 'Inter', system-ui, sans-serif;  /* Define a fonte */
+      background: var(--bg);                        /* Usa variável de cor de fundo */
+      color: var(--text);                           /* Usa variável de cor de texto */
+      min-height: 100vh;                            /* Altura mínima = altura da viewport */
+      padding: 0 0 60px;                            /* Espaço inferior para scroll */
+      transition: background-color .18s ease, color .18s ease;  /* Transição suave ao trocar tema */
     }
 
-    /* ── HEADER ── */
+    /* ────────────────── HEADER ────────────────── */
+    /* Estilos do cabeçalho fixo no topo */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
+      display: flex;                           /* Layout flexbox */
+      align-items: center;                     /* Alinha itens verticalmente */
+      justify-content: space-between;          /* Espaço entre logo e botão */
+      position: sticky;                        /* Fica fixo ao fazer scroll */
       top: 0;
-      z-index: 10;
+      z-index: 10;                             /* Fica acima de outros elementos */
       transition: background-color .18s ease, border-color .18s ease;
     }
 
+    /* Logo no header */
     header img {
       height: 36px;
       display: block;
     }
 
+    /* Badge com ponto verde e texto "Power BI Apps" */
     .header-badge {
       display: flex;
       align-items: center;
@@ -68,19 +75,21 @@
       font-size: 12px;
       font-weight: 600;
       color: var(--muted);
-      letter-spacing: .06em;
-      text-transform: uppercase;
+      letter-spacing: .06em;     /* Espaçamento aumentado entre letras */
+      text-transform: uppercase;  /* Converte texto para maiúsculas */
     }
 
+    /* Ponto verde do badge */
     .header-badge span {
       width: 8px;
       height: 8px;
-      border-radius: 50%;
+      border-radius: 50%;        /* Cria um círculo */
       background: var(--green);
       display: inline-block;
     }
 
-    /* THEME TOGGLE */
+    /* ────────────────── THEME TOGGLE ────────────────── */
+    /* Botão para alternar entre temas claro/escuro */
     .theme-toggle {
       background: none;
       border: 1px solid var(--border);
@@ -91,60 +100,68 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      cursor: pointer;           /* Cursor muda para pointer ao passar o mouse */
       transition: background-color .18s ease, border-color .18s ease;
       color: var(--text);
     }
 
+    /* Efeito hover no botão de tema */
     .theme-toggle:hover {
       background-color: var(--bg);
     }
 
+    /* Ícone SVG dentro do botão */
     .theme-toggle svg {
       width: 20px;
       height: 20px;
-      stroke: currentColor;
+      stroke: currentColor;           /* Usa a cor do texto */
       stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      stroke-linecap: round;          /* Extremidades arredondadas */
+      stroke-linejoin: round;         /* Junções arredondadas */
     }
 
-    /* ── HERO ── */
+    /* ────────────────── HERO (SEÇÃO PRINCIPAL) ────────────────── */
+    /* Seção de apresentação/boas-vindas */
     .hero {
       padding: 56px 40px 40px;
-      max-width: 960px;
-      margin: 0 auto;
+      max-width: 960px;              /* Largura máxima para leitura confortável */
+      margin: 0 auto;                /* Centraliza horizontalmente */
     }
 
+    /* Texto de boas-vindas */
     .greeting {
       font-size: 24px;
       font-weight: 700;
       color: var(--black);
       margin-bottom: 12px;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.01em;       /* Espaçamento negativo (aproxima letras) */
     }
 
+    /* Título principal */
     .hero h1 {
-      font-size: clamp(26px, 4vw, 38px);
+      font-size: clamp(26px, 4vw, 38px);  /* Responsive: mínimo 26px, máximo 38px */
       font-weight: 700;
-      line-height: 1.15;
+      line-height: 1.15;              /* Altura das linhas */
       color: var(--black);
       letter-spacing: -.02em;
     }
 
+    /* "Power BI" em verde dentro do título */
     .hero h1 em {
-      font-style: normal;
+      font-style: normal;             /* Remove itálico padrão da tag em */
       color: var(--green);
     }
 
+    /* Parágrafo descritivo */
     .hero p {
       margin-top: 12px;
       font-size: 15px;
       color: var(--muted);
-      max-width: 480px;
-      line-height: 1.6;
+      max-width: 480px;              /* Limita largura para melhor leitura */
+      line-height: 1.6;              /* Altura aumentada para leitura */
     }
 
+    /* Pill/badge com contagem de apps */
     .count-pill {
       display: inline-flex;
       align-items: center;
@@ -152,86 +169,97 @@
       margin-top: 20px;
       padding: 6px 14px;
       background: var(--black);
-      color: #fff;
+      color: #fff;                   /* Branco no light mode */
       font-size: 12px;
       font-weight: 600;
-      border-radius: 100px;
+      border-radius: 100px;          /* Extremamente arredondado = formato pill */
       letter-spacing: .04em;
     }
 
+    /* Texto preto no dark mode */
     [data-theme="dark"] .count-pill {
       color: #000;
     }
 
-    /* ── GRID ── */
+    /* ────────────────── GRID DE CARDS ────────────────── */
+    /* Container com layout grid responsivo */
     .grid {
       max-width: 960px;
       margin: 0 auto;
       padding: 0 40px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));  /* Cards responsivos */
+      gap: 16px;                     /* Espaço entre cards */
     }
 
-    /* ── CARD ── */
+    /* ────────────────── CARD ────────────────── */
+    /* Card individual dos apps Power BI */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px 22px 20px;
-      text-decoration: none;
-      color: inherit;
+      text-decoration: none;         /* Remove sublinhado de links */
+      color: inherit;                /* Herda cor do pai */
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      flex-direction: column;         /* Itens na vertical */
+      gap: 14px;                      /* Espaço entre itens */
       transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
       position: relative;
       overflow: hidden;
     }
 
+    /* Pseudo-elemento para border verde no hover */
     .card::after {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: 0;                       /* Cobre todo o card */
       border-radius: var(--radius);
-      border: 2px solid transparent;
+      border: 2px solid transparent;  /* Border invisível por padrão */
       transition: border-color .18s ease;
-      pointer-events: none;
+      pointer-events: none;           /* Não interfere com cliques */
     }
 
+    /* Efeito ao passar mouse sobre card */
     .card:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,.09);
-      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,.09);  /* Sombra suave */
+      transform: translateY(-2px);               /* Move card para cima */
     }
 
+    /* Sombra mais forte no dark mode */
     [data-theme="dark"] .card:hover {
       box-shadow: 0 6px 24px rgba(0,0,0,.5);
     }
 
+    /* Border verde aparece no hover */
     .card:hover::after {
       border-color: var(--green);
     }
 
+    /* Ícone dentro do card */
     .card-icon {
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      background: #f0fdf0;
+      background: #f0fdf0;            /* Verde claro */
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      flex-shrink: 0;                 /* Não encolhe */
     }
 
+    /* Ícone com fundo verde escuro no dark mode */
     [data-theme="dark"] .card-icon {
       background: #0f3d14;
     }
 
+    /* SVG do ícone */
     .card-icon svg {
       width: 20px;
       height: 20px;
     }
 
+    /* Nome do app no card */
     .card-label {
       font-size: 15px;
       font-weight: 600;
@@ -239,8 +267,9 @@
       line-height: 1.3;
     }
 
+    /* "Abrir app →" no card */
     .card-action {
-      margin-top: auto;
+      margin-top: auto;               /* Empurra para o final do card */
       display: flex;
       align-items: center;
       gap: 6px;
@@ -250,17 +279,20 @@
       letter-spacing: .03em;
     }
 
+    /* Seta do card-action */
     .card-action svg {
       width: 14px;
       height: 14px;
       transition: transform .18s ease;
     }
 
+    /* Seta se move ao passar mouse */
     .card:hover .card-action svg {
-      transform: translateX(3px);
+      transform: translateX(3px);     /* Move para direita */
     }
 
-    /* ── DIVIDER ── */
+    /* ────────────────── DIVIDER (SEPARADOR) ────────────────── */
+    /* Linha separadora entre seções */
     .divider {
       max-width: 960px;
       margin: 36px auto 20px;
@@ -270,22 +302,25 @@
       gap: 12px;
     }
 
+    /* Texto do divider */
     .divider span {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--muted);
-      white-space: nowrap;
+      white-space: nowrap;            /* Não quebra linha */
     }
 
+    /* Linha horizontal do divider */
     .divider hr {
-      flex: 1;
+      flex: 1;                        /* Cresce e ocupa espaço */
       border: none;
       border-top: 1px solid var(--border);
     }
 
-    /* ── FOOTER ── */
+    /* ────────────────── FOOTER (RODAPÉ) ────────────────── */
+    /* Rodapé da página */
     footer {
       max-width: 960px;
       margin: 48px auto 0;
@@ -297,6 +332,7 @@
       gap: 8px;
     }
 
+    /* Ponto verde antes do rodapé */
     footer::before {
       content: '';
       display: inline-block;
@@ -306,7 +342,8 @@
       background: var(--green);
     }
 
-    /* ── RESPONSIVE ── */
+    /* ────────────────── RESPONSIVE (MOBILE) ────────────────── */
+    /* Ajustes para telas pequenas */
     @media (max-width: 600px) {
       header { padding: 16px 20px; }
       .hero  { padding: 36px 20px 28px; }
@@ -318,16 +355,24 @@
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                      HEADER / CABEÇALHO                       ║ -->
+  <!-- ║ Logo, badge de status e botão para alternar tema (light/dark)║ -->
+  <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <header>
+    <!-- Logo codificado em base64 para não precisar de arquivo externo -->
     <img src="data:image/png;base64,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" 
          alt="Tragetta" />
+
+    <!-- Badge indicando status com "Power BI Apps" -->
     <div class="header-badge">
       <span></span>Power BI Apps
     </div>
+
+    <!-- Botão para alternar tema claro/escuro com ícones de sol e lua -->
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Sun icon (shown in dark mode) -->
+        <!-- Ícone do sol (visível no dark mode) -->
         <g class="sun-icon" style="opacity: 1; transition: opacity .18s ease;">
           <circle cx="12" cy="12" r="5"/>
           <line x1="12" y1="1" x2="12" y2="3"/>
@@ -339,7 +384,7 @@
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </g>
-        <!-- Moon icon (shown in light mode) -->
+        <!-- Ícone da lua (visível no light mode) -->
         <g class="moon-icon" style="opacity: 0; transition: opacity .18s ease;">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </g>
@@ -347,15 +392,28 @@
     </button>
   </header>
 
-  <!-- HERO -->
+  <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                SEÇÃO HERO (APRESENTAÇÃO)                     ║ -->
+  <!-- ║ Contém título, descrição e pill com contagem de apps         ║ -->
+  <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <section class="hero">
+    <!-- Texto de boas-vindas -->
     <div class="greeting">Olá, Seja bem vindo ao Portal de Business Intelligence da Tragetta!</div>
+
+    <!-- Título principal com destaque em verde para "Power BI" -->
     <h1>Acesse os apps<br><em>Power BI</em> da Tragetta</h1>
+
+    <!-- Parágrafo descritivo -->
     <p>Todos os painéis analíticos da empresa em um só lugar. Clique no app desejado para abrir diretamente no Power BI.</p>
+
+    <!-- Pill/badge mostrando total de apps disponíveis -->
     <div class="count-pill">12 apps disponíveis</div>
   </section>
 
-  <!-- GRID -->
+  <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                      GRID DE CARDS                           ║ -->
+  <!-- ║ Contém 12 cards com links para cada app Power BI             ║ -->
+  <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <div class="grid">
 
     <a class="card" href="https://app.powerbi.com/Redirect?action=OpenApp&appId=bcc5170f-3e8f-474d-8034-ac9348cf7706&ctid=ca81b511-04fa-4187-9228-8582a3695690&experience=power-bi" target="_blank" rel="noopener">
@@ -492,58 +550,91 @@
 
   </div>
 
-  <!-- FOOTER -->
+  <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                        RODAPÉ (FOOTER)                       ║ -->
+  <!-- ║ Informações de copyright e direitos autorais                 ║ -->
+  <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <footer>
     Business Intelligence · Tragetta &mdash; Todos os direitos reservados
   </footer>
 
+  <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                      SCRIPT JAVASCRIPT                       ║ -->
+  <!-- ║ Gerencia a alternância entre temas claro e escuro            ║ -->
+  <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <script>
-    // Theme Management
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const sunIcon = document.querySelector('.sun-icon');
-    const moonIcon = document.querySelector('.moon-icon');
+    // ──────────────────────────────────────────────────────────────
+    // GERENCIAMENTO DE TEMAS (Light/Dark Mode)
+    // ──────────────────────────────────────────────────────────────
 
-    // Check for saved theme preference or default to system preference
+    // Seleciona elementos necessários do DOM
+    const themeToggle = document.getElementById('theme-toggle');  // Botão para alternar tema
+    const htmlElement = document.documentElement;                 // Elemento <html>
+    const sunIcon = document.querySelector('.sun-icon');         // Ícone do sol
+    const moonIcon = document.querySelector('.moon-icon');       // Ícone da lua
+
+    /**
+     * Determina qual tema inicial usar:
+     * 1. Primeiro verifica se o usuário salvou uma preferência no localStorage
+     * 2. Se não houver, usa a preferência do sistema operacional
+     * 3. Padrão: tema claro
+     */
     function getInitialTheme() {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
-        return savedTheme;
+        return savedTheme;  // Retorna tema salvo
       }
       
-      // Check system preference
+      // Verifica preferência do SO (Windows/Mac/Linux)
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
-    // Apply theme
+    /**
+     * Aplica o tema escolhido
+     * @param {string} theme - 'light' ou 'dark'
+     * - Define o atributo data-theme no elemento <html>
+     * - Salva a escolha no localStorage para persistência
+     * - Atualiza a visibilidade dos ícones (sol/lua)
+     */
     function applyTheme(theme) {
-      htmlElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      updateIconVisibility(theme);
+      htmlElement.setAttribute('data-theme', theme);           // Aplica o tema via CSS
+      localStorage.setItem('theme', theme);                    // Salva preferência do usuário
+      updateIconVisibility(theme);                             // Atualiza ícones
     }
 
-    // Update icon visibility
+    /**
+     * Alterna a visibilidade entre ícone do sol e da lua
+     * @param {string} theme - Tema atual ('light' ou 'dark')
+     */
     function updateIconVisibility(theme) {
       if (theme === 'dark') {
-        sunIcon.style.opacity = '1';
-        moonIcon.style.opacity = '0';
+        sunIcon.style.opacity = '1';      // Sol visível no dark mode
+        moonIcon.style.opacity = '0';     // Lua escondida
       } else {
-        sunIcon.style.opacity = '0';
-        moonIcon.style.opacity = '1';
+        sunIcon.style.opacity = '0';      // Sol escondido
+        moonIcon.style.opacity = '1';     // Lua visível no light mode
       }
     }
 
-    // Toggle theme
+    /**
+     * Evento de clique no botão de tema
+     * Alterna entre light e dark mode
+     */
     themeToggle.addEventListener('click', () => {
       const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(newTheme);
     });
 
-    // Initialize theme on page load
+    /**
+     * Inicializa o tema quando a página carrega
+     */
     applyTheme(getInitialTheme());
 
-    // Listen for system theme changes
+    /**
+     * Monitora mudanças na preferência de tema do sistema operacional
+     * Se o usuário não tiver uma preferência salva, segue a mudança do SO
+     */
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       if (!localStorage.getItem('theme')) {
         applyTheme(e.matches ? 'dark' : 'light');
