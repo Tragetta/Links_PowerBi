@@ -67,6 +67,19 @@
       height: 60px;
       display: block;
       object-fit: contain;
+      filter: brightness(0) saturate(100%);  /* Preto no light mode */
+    }
+
+    /* Logo em dark mode - inverte para branco */
+    [data-theme="dark"] header img,
+    [data-theme="dark"] header .logo-img {
+      filter: brightness(0) invert(1) saturate(100%);  /* Branco no dark mode */
+    }
+
+    /* Container da logo */
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
     }
 
     /* Badge com ponto verde e texto "Power BI Apps" */
@@ -363,7 +376,9 @@
   <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <header>
     <!-- Logo Tragetta -->
-    <img src="logo tragetta.png" alt="Tragetta" class="logo-img" />
+    <div class="logo-wrapper">
+      <img src="logo tragetta.png" alt="Tragetta" class="logo-img" />
+    </div>
 
     <!-- Badge indicando status com "Power BI Apps" -->
     <div class="header-badge">
