@@ -52,7 +52,7 @@
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 20px 40px;
-      display: flex;                           /* Layout flexbox */
+      display: flex;                               /* Layout flexbox */
       align-items: center;                     /* Alinha itens verticalmente */
       justify-content: space-between;          /* Espaço entre logo e botão */
       position: sticky;                        /* Fica fixo ao fazer scroll */
@@ -74,9 +74,9 @@
       filter: grayscale(1) brightness(0.3);
     }
 
-    /* Logo em dark mode: branca */
+    /* Logo em dark mode: totalmente branca */
     [data-theme="dark"] header .logo-img {
-      filter: invert(1) grayscale(1) brightness(0.7);
+      filter: brightness(0) invert(1);
     }
 
     /* Container da logo */
@@ -412,7 +412,7 @@
   </header>
 
   <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
-  <!-- ║                SEÇÃO HERO (APRESENTAÇÃO)                     ║ -->
+  <!-- ║                SEÇÃO HERO (APRESENTAÇÃO)                      ║ -->
   <!-- ║ Contém título, descrição e pill com contagem de apps         ║ -->
   <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <section class="hero">
@@ -430,7 +430,7 @@
   </section>
 
   <!-- ╔═══════════════════════════════════════════════════════════════╗ -->
-  <!-- ║                      GRID DE CARDS                           ║ -->
+  <!-- ║                      GRID DE CARDS                          ║ -->
   <!-- ║ Contém 12 cards com links para cada app Power BI             ║ -->
   <!-- ╚═══════════════════════════════════════════════════════════════╝ -->
   <div class="grid">
